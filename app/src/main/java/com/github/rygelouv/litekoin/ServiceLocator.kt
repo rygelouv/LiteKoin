@@ -41,7 +41,7 @@ class ServiceLocator {
 
     private fun registerModule(module: Module) {
         module.declarationRegistry.forEach {
-            addService(it.value.createService())
+            addService(it.value.toService())
         }
     }
 
