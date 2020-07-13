@@ -18,23 +18,34 @@ package com.github.rygelouv.litekoin
  * limitations under the License.
  */
 
+data class DATA(val amount: Double)
+
 
 class UseCase(private val repo: Repository) {
     fun execute() = repo.getText()
+    fun loadData() = repo.getDataFromAPI()
 }
 
 class Repository {
+    private val api: MyAPI = get()
 
     fun getText() = "Text from repository"
 
+    fun getDataFromAPI() = api.getData()
+}
+
+class MyAPI {
+    fun getData() = DATA(20.0)
 }
 
 
 class ViewModel( private val useCase: UseCase) {
 
     fun showText() {
-        print(useCase.execute())
+        println(useCase.execute())
     }
+
+    fun showData() = println(useCase.loadData())
 }
 
 
@@ -45,6 +56,7 @@ val mod1 = module {
 
 val mod2 = module {
     factory { UseCase(get()) }
+    factory { MyAPI() }
 }
 
 
@@ -55,7 +67,9 @@ fun main() {
     }
 
     val viewModel: ViewModel by inject()
-    val repo: Repository = get()
+    val repo: Repository = get() // Forget about this. Just wanted to show off the get()
 
     viewModel.showText()
+    viewModel.showData()
+
 }
