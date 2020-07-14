@@ -2,7 +2,7 @@
 
 LiteKoin is simplified version of the amazing DI framework Koin.
 
-We tried to replicate the same thing but with a simple an naive approach.
+We tried to replicate the same thing but with a simple and naive approach.
 
 ## Overview
 
